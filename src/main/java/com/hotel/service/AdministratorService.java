@@ -45,6 +45,10 @@ public class AdministratorService {
     }
 
     public HotelAvailabilityStatistics hotelAvailabilityStatistics(@Argument LocalDate from, @Argument LocalDate to) {
+        // Validate that from is before to
+        if (from.isEqual(to) || from.isAfter(to)) {
+            throw new IllegalArgumentException("Check-in date must be before the check-out date.");
+        }
         List<Reservation> reservations = reservationRepository.findReservationsWithinDateRange(from, to);
         List<Room> allRooms = (List<Room>) roomRepository.findAll();
 

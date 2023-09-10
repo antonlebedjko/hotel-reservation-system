@@ -61,6 +61,10 @@ public class CustomerService {
     }
 
     public List<Room> checkAllAvailableRooms(LocalDate checkInDate, LocalDate checkOutDate) {
+        // Validate that checkInDate is before checkOutDate
+        if (checkInDate.isEqual(checkOutDate) || checkInDate.isAfter(checkOutDate)) {
+            throw new IllegalArgumentException("Check-in date must be before the check-out date.");
+        }
         return roomRepository.findAvailableRooms(checkInDate, checkOutDate);
     }
 }
