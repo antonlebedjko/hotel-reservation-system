@@ -9,6 +9,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 
 @Entity
 @Getter
@@ -21,6 +23,6 @@ public class Room {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long roomId;
     private int roomNumber;
-    private Double roomPricePerDay;
+    private BigDecimal roomPricePerDay;
 
 }

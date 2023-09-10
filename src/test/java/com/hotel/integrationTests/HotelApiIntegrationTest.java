@@ -14,6 +14,7 @@ import org.springframework.graphql.test.tester.GraphQlTester;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -40,7 +41,7 @@ public class HotelApiIntegrationTest {
     void addRoomShouldAddRoom() {
         String document1 = """
             mutation {
-              addRoom(room: {roomNumber: 108, roomPricePerDay: 300.0}) {
+              addRoom(room: {roomNumber: 108, roomPricePerDay: 300}) {
                 roomId,
                 roomNumber,
                 roomPricePerDay
@@ -55,12 +56,12 @@ public class HotelApiIntegrationTest {
                 .satisfies(room -> {
                     assertNotNull(room.getRoomId());
                     assertEquals(108, room.getRoomNumber());
-                    Assertions.assertEquals(300.0, (double) room.getRoomPricePerDay());
+                    Assertions.assertEquals(BigDecimal.valueOf(300), room.getRoomPricePerDay());
                 });
 
         String document2 = """
             mutation {
-              addRoom(room: {roomNumber: 109, roomPricePerDay: 220.0}) {
+              addRoom(room: {roomNumber: 109, roomPricePerDay: 220}) {
                 roomId,
                 roomNumber,
                 roomPricePerDay
@@ -75,7 +76,7 @@ public class HotelApiIntegrationTest {
                 .satisfies(room -> {
                     assertNotNull(room.getRoomId());
                     assertEquals(109, room.getRoomNumber());
-                    Assertions.assertEquals(220.0, (double) room.getRoomPricePerDay());
+                    Assertions.assertEquals(BigDecimal.valueOf(220), room.getRoomPricePerDay());
                 });
     }
 
@@ -120,7 +121,7 @@ public class HotelApiIntegrationTest {
                 .satisfies(room -> {
                     assertNotNull(room.getRoomId());
                     assertEquals(109, room.getRoomNumber());
-                    Assertions.assertEquals(215, (double) room.getRoomPricePerDay());
+                    Assertions.assertEquals(BigDecimal.valueOf(215), room.getRoomPricePerDay());
                 });
     }
 
@@ -144,7 +145,7 @@ public class HotelApiIntegrationTest {
                 .satisfies(room -> {
                     assertNotNull(room.getRoomId());
                     assertEquals(109, room.getRoomNumber());
-                    Assertions.assertEquals(215, (double) room.getRoomPricePerDay());
+                    Assertions.assertEquals(BigDecimal.valueOf(215.0), room.getRoomPricePerDay());
                 });
     }
 

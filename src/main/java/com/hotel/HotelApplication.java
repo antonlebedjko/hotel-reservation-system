@@ -12,6 +12,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.core.env.Environment;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.time.LocalDate;
 import java.util.Arrays;
 
@@ -47,9 +49,9 @@ public class HotelApplication {
 		customerRepository.save(customer1);
 		customerRepository.save(customer2);
 
-		Room room1 = new Room(null, 101, 100.00);
-		Room room2 = new Room(null, 102, 120.00);
-		Room room3 = new Room(null, 103, 90.50);
+		Room room1 = new Room(null, 101, BigDecimal.valueOf(220));
+		Room room2 = new Room(null, 102, BigDecimal.valueOf(120));
+		Room room3 = new Room(null, 103, BigDecimal.valueOf(90.5));
 
 		roomRepository.save(room1);
 		roomRepository.save(room2);

@@ -3,6 +3,8 @@ scalar Date
     "https://tools.ietf.org/html/rfc3339"
   )
 
+scalar BigDecimal
+
 type Query {
     rooms: [Room]
     roomById(roomId: ID!): Room
@@ -20,13 +22,13 @@ type Mutation {
 
 input RoomInput {
     roomNumber: Int
-    roomPricePerDay: Float
+    roomPricePerDay: BigDecimal
 }
 
 type Room {
     roomId: ID!
     roomNumber: Int!
-    roomPricePerDay: Float
+    roomPricePerDay: BigDecimal
 }
 
 type Customer {

@@ -12,5 +12,10 @@ public class GraphQLConfig {
     public RuntimeWiringConfigurer date() {
         return wiringBuilder -> wiringBuilder.scalar(ExtendedScalars.Date);
     }
+
+    @Bean
+    public RuntimeWiringConfigurer money() {
+        return wiringBuilder -> wiringBuilder.scalar(ExtendedScalars.GraphQLBigDecimal);
+    }
 }
 
