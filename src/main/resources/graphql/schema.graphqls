@@ -1,0 +1,64 @@
+scalar Date
+  @specifiedBy(url:
+    "https://tools.ietf.org/html/rfc3339"
+  )
+
+type Query {
+    rooms: [Room]
+    roomById(roomId: ID!): Room
+    roomSchedule(roomId: ID!): [Reservation]
+    checkAllAvailableRooms(checkInDate: Date!, checkOutDate: Date!): [Room]
+    hotelAvailabilityStatistics(from: Date!, to: Date!): HotelAvailabilityStatistics
+}
+
+type Mutation {
+    addRoom(room: RoomInput): Room
+    editRoom(roomId: ID!, room: RoomInput): Room
+    deleteRoom(roomId: ID!): Boolean
+    makeReservation(input: ReservationInput!): Reservation
+}
+
+input RoomInput {
+    roomNumber: Int
+    roomPricePerDay: Float
+}
+
+type Room {
+    roomId: ID!
+    roomNumber: Int!
+    roomPricePerDay: Float
+}
+
+type Customer {
+    customerId: ID!
+    email: String
+    phoneNumber: String
+    firstName: String
+    lastName: String
+}
+
+input ReservationInput {
+    roomId: ID!
+    checkInDate: Date
+    checkOutDate: Date
+    customerId: ID!
+}
+
+type Reservation {
+    reservationId: ID!
+    checkInDate: String!
+    checkOutDate: String!
+    customer: Customer!
+    room: Room!
+}
+
+type HotelAvailabilityStatistics {
+        from: Date!
+        to: Date!
+        totalRooms: Int
+        freeRooms: Int
+        busyRooms: Int
+        freeRoomsList: [Room]
+        busyRoomsList: [Room]
+}
+
